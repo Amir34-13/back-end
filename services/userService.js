@@ -134,7 +134,8 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   if (email) user.email = email;
   if (role) user.role = role; 
   if (bio) user.bio = bio;
-  if (req.file) user.profilePicture = `/uploads/${req.file.filename}`;
+  if (req.file) req.body.profilePicture = req.file.path;
+
 
 
   await user.save();
@@ -184,9 +185,6 @@ for (const review of reviews) {
 }
   const user = await User.findOneAndDelete({ _id: id });
 
-const filePath = path.join(__dirname, "..", user.profilePicture);
-
-  deleteFile(filePath);
 
 
   if (!user) {

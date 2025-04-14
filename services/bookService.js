@@ -46,7 +46,8 @@ exports.createBook = asyncHandler(async (req, res, next) => {
        
 
     if (req.file) {
-       req.body.coverImage = `/uploads/${req.file.filename}`; // URL de l'image
+       req.body.coverImage = req.file.path;
+
     }
     const book = await Book.create(req.body);
   if(!book){
@@ -60,7 +61,8 @@ exports.createBook = asyncHandler(async (req, res, next) => {
 exports.updateBook = asyncHandler(
     async (req, res, next) => {
       if (req.file) {
-        req.body.coverImage = `/uploads/${req.file.filename}`; // URL de l'image
+        req.body.coverImage = req.file.path;
+
       }
         const book = await Book.findByIdAndUpdate(req.params.id,req.body, {new: true, runValidators: true});
         if (!book) {
@@ -76,8 +78,7 @@ exports.deleteBook = asyncHandler(
         if (!book) {
             next(new ApiError("Book not found", 404));
         }
-        const filePath = path.join(__dirname, "..", book.coverImage);
-        deleteFile(filePath);
+        
         if (!book) {
             next(new ApiError("Book not found", 404));
         }

@@ -16,7 +16,7 @@ const User = require("../modules/userModel");
 exports.signup = asyncHandler(async (req, res, next) => {
   req.body.password = await bcrypt.hash(req.body.password, 12);
   if (req.file) {
-    req.body.profilePicture = `/uploads/${req.file.filename}`;
+    req.body.profilePicture = req.file.path;
   }
 
   const user = await User.create(req.body);
