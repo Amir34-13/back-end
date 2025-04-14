@@ -28,8 +28,11 @@ dbConnection();
 
 // Enable other domains to access your application
 
-app.use(cors());
-app.options("*", cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://ton-autre-domaine.com"],
+  })
+);
 
 // compress all responses
 app.use(compression());
