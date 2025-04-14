@@ -30,7 +30,11 @@ dbConnection();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://ton-autre-domaine.com"],
+    origin: [
+      "http://localhost:5173",
+      "https://front-end-akks.onrender.com",
+      "https://front-end-swart-iota.vercel.app",
+    ],
   })
 );
 
